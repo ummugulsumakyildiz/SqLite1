@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this,"500 ml Eklediniz",Toast.LENGTH_SHORT).show();
     }
-
+//Buraya yorum satırı yaptım dosyada değşiklik yaptım
   /*  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu_main,menu);
