@@ -20,8 +20,8 @@ public class Archive extends AppCompatActivity {
         dbHandler=new MyDbHandler(this,null,null,1);
 
         ArcList=(ListView) findViewById(R.id.listviewArc);
-        ArrayList<String> dbString=dbHandler.databaseToString();
-        ListAdapter listAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
+        ArrayList<String> dbString=dbHandler.databaseToString();//result
+        ListAdapter listAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,dbString);
         ArcList.setAdapter(listAdapter);
 
     }

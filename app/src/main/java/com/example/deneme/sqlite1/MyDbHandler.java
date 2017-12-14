@@ -31,11 +31,8 @@ public class MyDbHandler extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        String query="CREATE TABLE "+ TABLE_PRODUCTS +"("+
-                COLUMN_ID+"INTEGER PRIMARY KEY AUTOINCREAMENT" +
-                COLUMN_PRODUCTSNAME + "TEXT" +
-                ");";
+        //String tablCreate="CREATE TABLE products ( id INTEGER PRIMARY KEY AUTOINCREMENT , productname TEXT)";
+        String query="CREATE TABLE "+ TABLE_PRODUCTS +"("+ COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT ," + COLUMN_PRODUCTSNAME + " TEXT" + ");";
         db.execSQL(query);
     }
 
@@ -65,13 +62,13 @@ public class MyDbHandler extends SQLiteOpenHelper{
     //database den bir şey silmek istersek bunu kullanırız.
     public void deleteProduct(String productName){
         SQLiteDatabase db=getWritableDatabase();
-        db.execSQL("DELETE FROM" + TABLE_PRODUCTS + "WHERE" + COLUMN_PRODUCTSNAME + "=\"" + productName + "\";");
+        db.execSQL("DELETE FROM" + TABLE_PRODUCTS + " WHERE" + COLUMN_PRODUCTSNAME + "=\"" + productName + "\";");
     }
 
     public ArrayList<String> databaseToString(){
         String dbString="";
         SQLiteDatabase db=getWritableDatabase();
-        String query="SELECT * FROM "+ TABLE_PRODUCTS + "WHERE 1";
+        String query="SELECT * FROM "+ TABLE_PRODUCTS + " WHERE 1";
 
         Cursor c =db.rawQuery(query,null);
         c.moveToFirst();
@@ -79,17 +76,14 @@ public class MyDbHandler extends SQLiteOpenHelper{
         //
         while (!c.isAfterLast()){
             if(c.getString(c.getColumnIndex("productname")) !=null){
-                dbString +=c.getString(c.getColumnIndex("productname"));
-                dbString+="\n";
 
                 String name=c.getString(c.getColumnIndex("productname"));
-
+                String id = c.getString(c.getColumnIndex("id"));
                 Calendar time=Calendar.getInstance();
                 SimpleDateFormat df=new SimpleDateFormat("dd-MMM-YYY-HH:mm");
                 String formatteDate=df.format(time.getTime());
 
-
-                results.add(formatteDate +"    "+"");
+                results.add(id+" "+name+"     "+formatteDate);
             }
             c.moveToNext();
         }
